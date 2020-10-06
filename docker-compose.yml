@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:11
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      - POSTGRES_DB=todo_list
+      - POSTGRES_PASSWORD=todo_list_pwd
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+  flaskapp:
+    build: .
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/opt/services/flaskapp/src
+    depends_on:
+      - postgres
