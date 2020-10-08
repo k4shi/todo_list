@@ -1,0 +1,1 @@
+create table todo_list (id serial not null constraint todo_list_pk primary key, name varchar(50) not null, is_status boolean not null, created_at date, content varchar(50));
