@@ -1,0 +1,30 @@
+start:
+    docker-compose build
+    docker-compose up
+
+API urls
+domain 0.0.0.0:8000
+
+GET /api/v1/todos
+p/s/
+    /api/v1/todos?status=True/False
+
+
+POST /api/v1/todos
+request:
+{
+    "name": "some name",
+    "content": "some content",
+    "created_at": "2020-10-02",
+    "is_status": false
+}
+
+GET /api/v1/todos/<todo_id>
+PUT /api/v1/todos/<todo_id
+request:
+{
+    "name": "some name",
+    "content": "some content",
+    "created_at": "2020-10-02",
+    "is_status": false
+}

@@ -1,20 +1,23 @@
 version: '3'
 
 services:
-  postgres:
+  todo_postgres:
     image: postgres:11
     ports:
       - "127.0.0.1:5432:5432"
     environment:
-      - POSTGRES_DB=todo_list
-      - POSTGRES_PASSWORD=todo_list_pwd
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=passwd
     volumes:
       - ./postgres:/var/lib/postgresql/data
-  flaskapp:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  web_app:
     build: .
+    environment:
+      SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://postgres:passwd@db/postgres
     ports:
-      - 5000:5000
+      - "8000:8000"
     volumes:
-      - .:/opt/services/flaskapp/src
+      - .:/opt/todo_service
     depends_on:
-      - postgres
+      - todo_postgres
